@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+.sidebar {
+margin: 0;
+padding: 0;
+width: 200px;
+background-color: rgb(254, 142, 148);
+position: fixed;
+height: 100%;
+overflow: auto;
+}
+
+.sidebar a {
+display: block;
+color: rgb(224, 224, 224);
+padding: 16px;
+text-decoration: none;
+}
+
+.sidebar a.active {
+background-color: rgb(70, 90, 99);
+color: white;
+}
+
+.sidebar a:hover:not(.active) {
+background-color: #555;
+color: white;
+}
+
+div.content {
+margin-left: 200px;
+padding: 1px 16px;
+height: 730px;
+}
+
+@media screen and (max-width: 700px) {
+.sidebar {
+width: 100%;
+height: auto;
+position: relative;
+}
+.sidebar a {float: left;}
+div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+.sidebar a {
+text-align: center;
+float: none;
+}
+}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<div id="loging" style="display: block; background-color:rgb(255, 225, 225); height: 750px;">
+  <div id="ddiv">
+    <h1 class="fw-semibold" style="color:rgb(57, 88, 100); text-align: center; padding-top: 20px;">Smart Medical Records Management System</h1>
+    <img src="admina.png" alt="" style="height: 65%;width: 60%; margin-top: 70px;">
+  
+    <form  class="w-25 p-3class= position-absolute top-50 end-0 translate-middle-y" style="margin-right: 200px;">
+      
+          <h1 class="fw-light">Admin Loging</h1>
+          <hr>
+    
+          <label for="email" class="form-label"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="emailDoc" id="emailAd" class="form-control"  required>
+    
+          <label class="form-label"><b>Password</b></label>
+          <input type="password" placeholder="Password" name="pswDoc" id="pswAd" class="form-control"  required>
+    
+          <hr>
+         
+          <button type="button" id="submitadmin" name="submitData" class="btn btn-success" style="background-color: rgb(37, 47, 53);
+          color: white;">Login</button>
+    </form>
+  </div>
+</div>
+<div id="main" style="display: none;">
+<div class="sidebar">
+  <h3 class="fw-semibold" style="color: white; text-align: center;">Smart Medical Records Management System</h3>
+  <a class="acticve" href="" id="dashboard">Analytics</a>
+  <a href="docRegister.html" id="doc" >Doctors Management</a>
+  <a href="patientRegister.html" id="patient">Patients Management</a>
+  <a href="hospitalRegistration.html" id="hospital">Hospitals Management</a>
+  <a href="" id="predict" >Prediction Management</a>
+  <a href="reports.html" id="analyce">Report Generate</a>
+  <button type="button"id="logout" class="btn btn-success" style="background-color: rgb(37, 47, 53);
+  color: white;">Logout</button>
+</div>
+<div class="content" id="content1">
+</div>
+</div>
+<script type="module">
+  
+  var dashboard = document.getElementById("dashboard");
+  var doc = document.getElementById("doc");
+  var patient = document.getElementById("patient");
+  var hospital = document.getElementById("hospital");
+  var predict = document.getElementById("predict");
+  var analyce = document.getElementById("analyce");
+  var logout = document.getElementById("logout");
+  var links = document.querySelectorAll('.sidebar a');
+
+  var currentIframe = null;
+  window.addEventListener('load', () => {
+    dashboard.click();
+  });
+  dashboard.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent the default behavior of the link
+    
+    if (currentIframe) {
+      // remove the previous iframe if it exists
+      currentIframe.remove();
+    }
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = 'analyce.html';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    document.getElementById('content1').appendChild(iframe);
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+    dashboard.classList.add('active');
+    // set the currentIframe variable to the new iframe
+    currentIframe = iframe;
+  });
+
+  doc.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent the default behavior of the link
+    
+    if (currentIframe) {
+      // remove the previous iframe if it exists
+      currentIframe.remove();
+    }
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = 'docRegister.html';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    document.getElementById('content1').appendChild(iframe);
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+    doc.classList.add('active');
+    // set the currentIframe variable to the new iframe
+    currentIframe = iframe;
+  });
+  
+  patient.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent the default behavior of the link
+    
+    if (currentIframe) {
+      // remove the previous iframe if it exists
+      currentIframe.remove();
+    }
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = 'patientRegister.html';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    document.getElementById('content1').appendChild(iframe);
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+    patient.classList.add('active');
+    // set the currentIframe variable to the new iframe
+    currentIframe = iframe;
+  });
+  hospital.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent the default behavior of the link
+    
+    if (currentIframe) {
+      // remove the previous iframe if it exists
+      currentIframe.remove();
+    }
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = 'hospitalRegistration.html';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    document.getElementById('content1').appendChild(iframe);
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+    hospital.classList.add('active');
+    // set the currentIframe variable to the new iframe
+    currentIframe = iframe;
+  });
+
+  analyce.addEventListener('click', (e) => {
+    e.preventDefault(); // prevent the default behavior of the link
+    
+    if (currentIframe) {
+      // remove the previous iframe if it exists
+      currentIframe.remove();
+    }
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = 'reports.html';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    document.getElementById('content1').appendChild(iframe);
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+    analyce.classList.add('active');
+    // set the currentIframe variable to the new iframe
+    currentIframe = iframe;
+  });
+
+
+  //..............................................................................
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+    import {getDatabase, set, ref, child, update, get,
+            query, orderByChild, equalTo} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+    
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        // Your configs
+        apiKey: "AIzaSyBzzFbIdtEvJbITERI0Z8z1fxVlGNxdDLs",
+  authDomain: "patientreg-990f5.firebaseapp.com",
+  projectId: "patientreg-990f5",
+  storageBucket: "patientreg-990f5.appspot.com",
+  messagingSenderId: "1010672762357",
+  appId: "1:1010672762357:web:20db3eac86471c37b574bc"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+    submitadmin.addEventListener('click', (e) => {
+    var email = document.getElementById("emailAd").value;
+    var password = document.getElementById("pswAd").value;
+   
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            // ...
+
+            // save log in details into real time database
+            var lgDate = new Date();
+            update(ref(database, 'admin/' + user.uid), {
+                last_login: lgDate,
+            })
+            alert('Login Successfull');
+            document.getElementById("loging").style.display = "none";
+            document.getElementById("main").style.display = "block";
+            window.addEventListener('load', () => {
+               dashboard.click();
+            });
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+        });
+      });
+
+      logout.addEventListener('click', (e) => {
+        signOut(auth).then(() => {
+          alert('Logout Successfull');
+            document.getElementById("loging").style.display = "block";
+            document.getElementById("main").style.display = "none";
+
+
+        }).catch((error) => {
+            // An error happened.
+          });
+    });
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

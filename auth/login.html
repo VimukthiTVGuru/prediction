@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+       body{
+            background-color: rgb(255,225,225);
+        }
+    </style>
+  </head>
+
+<body>
+
+<div id="qrdiv" style="display: none;" class="w-100 position-absolute top-0 start-50 translate-middle-x">
+  
+<h1 class="fw-semibold " style="color:rgb(57, 88, 100); text-align: center;margin-top: 20px;">Smart Medical Records Management System</h1> 
+<img src="patienta.png" alt="" style="height: 65%;width: 65%;">
+
+
+</div>
+<div id="pdiv" style="display: none;">
+<form  class="w-25 p-3class= position-absolute top-50 end-0 translate-middle-y" style="margin-right: 180px;">
+    <div class="container" id="abc">
+        <h1 class="fw-light">Patient loging</h1>
+        <hr>
+
+        <label for="email" class="form-label"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" id="email" class="form-control" required>
+
+        <label class="form-label"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="psw" id="psw" class="form-control" required>
+
+        <hr>
+
+        <button type="button" id="submitData" name="submitData" class="btn btn-success" style="background-color: rgb(37, 47, 53);
+        color: white;">Login</button>
+        <p class="text-center fw-bold mx-3 mb-0 text-muted">--------------------OR---------------------</p>
+        <div id="output"></div>
+        <video id="video" width="300" height="200"></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <button type="button" id="qrlogPatient" name="qrlogPatient"  class="btn btn-success" style="background-color: rgb(37, 47, 53);
+        color: white;">Qr Login</button>
+
+        <button type="button" id="DctorsingOutId" name="DctorsingOutId" class="btn btn-light">Doctor logout</button>
+        <br>
+
+    </div>
+
+</form>
+</div>
+
+
+<div id="ddiv">
+  <h1 class="fw-semibold" style="color:rgb(57, 88, 100); text-align: center;padding-top: 20px;">Smart Medical Records Management System</h1>
+  <img src="doctora.png" alt="" style="height: 60%;width: 60%;">
+
+  <form  class="w-25 p-3class= position-absolute top-50 end-0 translate-middle-y" style="margin-right: 200px;">
+    
+        <h1 class="fw-light">Doctor Loging</h1>
+        <hr>
+  
+        <label for="email" class="form-label"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="emailDoc" id="emailDoc" class="form-control"  required>
+  
+        <label class="form-label"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="pswDoc" id="pswDoc" class="form-control"  required>
+  
+        <hr>
+       
+        <button type="button" id="submitDataDoc" name="submitData" class="btn btn-success" style="background-color: rgb(37, 47, 53);
+        color: white;">Login</button>
+  </form>
+
+ 
+</div>
+
+
+<div id="datadiv" style="display: none; background-color: rgb(241, 243, 255); height: 750px;">
+  <h1 class="fw-semibold" style="color:rgb(57, 88, 100); text-align: center;">Smart Medical Records Management System</h1>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-4">
+        
+                <div class="card" style="margin-top: 5px;"style="background-color: rgb(254, 142, 148);">
+                <div class="card-body"style="background-color: rgb(254, 142, 148);">
+                    <div class="d-flex flex-column align-items-center text-center" style="background-color: rgb(254, 142, 148);">
+                      <h5 class="fw-bold">Patient Name</h5><div id="nameId"></div>
+                    <div class="mt-3">
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="card mt-3" style="background-color: rgb(254, 142, 148);">
+                <ul class="list-group list-group-flush" style="background-color: rgb(254, 142, 148);">
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap" style="background-color: rgb(2254, 142, 148);">
+                      <h5 class="fw-bold">Address</h5><div id="addressId"></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"style="background-color: rgb(254, 142, 148);">
+                      <h5 class="fw-bold">Date of Birth</h5><div id="dobId"></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"style="background-color: rgb(254, 142, 148);">
+                      <h5 class="fw-bold">Age</h5><div id="ageId"></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"style="background-color: rgb(254, 142, 148);">
+                      <h5 class="fw-bold">Contact Number</h5><div id="telId"></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"style="background-color: rgb(254, 142, 148);">
+                      <button type="button" id="UsersingOutId" name="UsersingOutId" class="btn btn-light">Sign-out</button>
+                    </li>
+                </ul>
+                </div>
+
+                <div class="card mt-3" style="overflow-y: scroll; height: 280px; background-color: rgb(254, 142, 148);">
+                    <h4><b>Chronic diseases and allergies</b></h4>
+                    <P id="para" class="m-2">
+                    
+                    </P>
+                </div>
+        </div>
+        <div class="col-8" id="wrapper" class="w-75 h-50 position-absolute top-0 end-0" style="height: 300px;">
+        <div style="height: 300px; margin-top: 5px;">
+          <div class="input-group mb-3">
+            <input type="text" id="search" class="form-control" placeholder="Search Here..." aria-label="Recipient's username" aria-describedby="button-addon2">
+          </div>
+        <div style="overflow-y: scroll; height: 280px;" >
+        <table class="table h-50" >
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col">Diagnosis</th>
+                <th scope="col">Prescription</th>
+                <th scope="col">Doctor Id (SLMC)</th>
+                <th scope="col">Doctor Name</th>
+            </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+      </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+<!-- Modal1 create data -->
+
+<div class="form-popup h-50 position-absolute top-50 end-0 mt-3" id="myForm" style="margin-right: 8%; width: 55%;" >
+    <form action="" class="form-container">
+  <h4 style="color: #818181;">Create Prescription</h4>
+  <div class="row">
+  <div class="mb-3 col">
+    <label  class="form-label">Catagory</label>
+    <select name="Category" id="categoryId" class="form-select">
+      <option value="volvo">Ear</option>
+      <option value="saab" >Eye</option>
+    </select>
+  </div>
+  <div class="mb-3 col">
+    <label class="form-label">Diagnosis</label>
+    <input type="text" class="form-control" id="diagnosisId" >
+  </div>
+</div>
+  <div class="mb-3">
+    <label class="form-label">Prescription</label>
+    <input type="text" class="form-control" id="prescriptionId" >
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Chronic Diseases and Allergies</label>
+    <input type="text" class="form-control" id="spd" />
+  </div>
+  <button type="button" id="createPresId" name="createPresId" class="btn btn-success" style="background-color: rgb(37, 47, 53);
+  color: white;">Create</button>
+  
+</form>
+</div>
+
+
+
+</div>
+</body>
+</html>
+
+
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+    import {getDatabase, set, ref, child, update, get,
+            query, orderByChild, equalTo} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+    
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        // Your configs
+        apiKey: "AIzaSyBzzFbIdtEvJbITERI0Z8z1fxVlGNxdDLs",
+  authDomain: "patientreg-990f5.firebaseapp.com",
+  projectId: "patientreg-990f5",
+  storageBucket: "patientreg-990f5.appspot.com",
+  messagingSenderId: "1010672762357",
+  appId: "1:1010672762357:web:20db3eac86471c37b574bc"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+    let x;
+    let y;
+    let dName;
+    let dId;
+    var dataPetient=[];
+    var dataDoctor=[];
+    var province;
+    var city;
+    var phone;
+//---------------------------------------------------------------------
+    const parient = ref(database, "users");
+    get(parient)
+                  .then((snapshot) => {
+                    var ab =[];
+                    snapshot.forEach(childSnapshot =>{
+                      ab.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                   
+                    ab.forEach(element =>{
+                    Abc(element.email)
+                    });
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+      function Abc(email){
+        dataPetient.push(email);
+       
+      }
+
+    const doctor = ref(database, "doORhospital");
+    get(doctor)
+                  .then((snapshot) => {
+                    var cd =[];
+                    snapshot.forEach(childSnapshot =>{
+                      cd.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                   
+                    cd.forEach(element =>{
+                    Efg(element.email)
+                    });
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+      function Efg(email){
+        dataDoctor.push(email);
+       
+      }
+      var m;
+      var p;
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const outputDiv = document.getElementById('output');
+      const constraints = { video: { facingMode: 'environment' } };
+      var st;
+      var a;
+
+// Define a global variable to hold the media stream
+      let stream;
+
+      function qr() {
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(function(mediaStream) {
+            stream = mediaStream;
+            video.srcObject = stream;
+            video.setAttribute('playsinline', true);
+            video.play();
+            requestAnimationFrame(tick);
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+
+   
+
+        function tick() {
+          if (video.readyState === video.HAVE_ENOUGH_DATA) {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+            if (code) {
+              outputDiv.innerHTML = "Scaned Successfully";
+              a = code.data;
+              console.log("blmu",a);
+              var tasksRef = query(ref(database, "users"), orderByChild("id"), equalTo(a));
+              get(tasksRef)
+                .then((snapshot) => {
+                  st = [];
+                  console.log("hari");
+                  snapshot.forEach(childSnapshot => {
+                    st.push(childSnapshot.val());
+                  });
+                  
+                  AddAllSecureToTable(st);
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+              
+              // Stop the camera after QR code has been scanned
+              stopCamera();
+              return;
+            }
+        
+          }
+          requestAnimationFrame(tick);
+        }
+        
+        tick();
+      }
+      function stopCamera() {
+        if (stream) {
+          stream.getTracks().forEach(track => {
+            track.stop();
+          });
+        }
+      }
+
+
+
+      function AddSecureToTable(id, email, password) {
+        
+          m = email;
+          p = password;
+          console.log("one",email);
+          console.log("yako",m);
+
+        
+      
+      }
+      function AddAllSecureToTable(st){
+        console.log("ok");
+        console.log(st);
+        if(st.length===0){
+          m=0;
+          p=0;
+        }else{
+          st.forEach(element =>{
+            AddSecureToTable(element.id, element.email, element.password)
+          });
+        }
+        
+       
+      }
+    
+    
+
+
+
+    function apitry(email,password){
+      
+     if(dataDoctor.includes(email)){ 
+      // log in hospital/doctor
+       signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            // ...
+
+            // save log in details into real time database
+            var lgDate = new Date();
+            update(ref(database, 'doORhospital/' + user.uid), {
+                last_login: lgDate,
+            })
+            y=user.uid;
+            console.log(y);
+
+            alert('Login Successfull');
+            document.getElementById("ddiv").style.display = "none";
+            document.getElementById("qrdiv").style.display = "block";
+            document.getElementById("pdiv").style.display = "block";
+            qr();
+
+
+
+            const dDetails= query(ref(database, "doORhospital"), orderByChild("id"), equalTo(y) );
+            get(dDetails)
+                  .then((snapshot) => {
+                    var ef =[];
+                    snapshot.forEach(childSnapshot =>{
+                      ef.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                   
+                    ef.forEach(element =>{
+                    Hij(element.fName,element.lName,element.slmc)
+                    });
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+            function Hij(fName,lName,slmc){
+              dName = (fName+" "+lName);
+              dId = slmc;
+          
+            }
+
+
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+        });
+
+     }
+     else{
+        alert('please register before login')
+     }
+    }
+
+
+
+
+
+
+
+//....................................................................
+
+    submitDataDoc.addEventListener('click', (e) => {
+
+      let email = document.getElementById('emailDoc').value;
+      let password = document.getElementById('pswDoc').value;
+      apitry(email,password);
+
+ 
+    });
+  
+  // sign out doctor
+    DctorsingOutId.addEventListener('click', (e) => {
+        signOut(auth).then(() => {
+          alert('Logout Successfull');
+            stopCamera();
+            document.getElementById("datadiv").style.display = "none";
+            document.getElementById("pdiv").style.display = "none";
+            document.getElementById("qrdiv").style.display = "none";
+            document.getElementById("ddiv").style.display = "block";
+            track.stop();
+
+
+        }).catch((error) => {
+            // An error happened.
+          });
+    });
+
+
+
+    //..............................................................
+   function apitryhari(email,password){
+    if(dataPetient.includes(email)){ 
+      console.log("two",email)
+        // log in user
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                var user = userCredential.user;
+                // ...
+
+                // save log in details into real time database
+                var lgDate = new Date();
+                update(ref(database, 'users/' + user.uid), {
+                    last_login: lgDate,
+                })
+                x=user.uid;
+                console.log(x);
+
+                alert('Login Successfull');
+                DisplayUser();
+                DisplayValue();
+                stopCamera();
+                document.getElementById("ddiv").style.display = "none";
+                document.getElementById("pdiv").style.display = "none";
+                document.getElementById("qrdiv").style.display = "none";
+                document.getElementById("datadiv").style.display = "block";
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+       }
+       else{
+        alert('please register before login')
+       }
+   }
+
+
+
+//-----------------patient signout-------------------
+    qrlogPatient.addEventListener('click', (e) => {
+
+    let email = m;
+    let password = p;
+    apitryhari(email,password);
+
+
+    });
+
+    submitData.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('psw').value;
+        apitryhari(email,password);
+        
+
+      
+ 
+    });
+  // sign out user
+    UsersingOutId.addEventListener('click', (e) => {
+        signOut(auth).then(() => {
+          alert('Logout Successfull');
+          p="";
+          m="";
+          st="";
+          outputDiv.innerHTML="";
+          qr();
+            document.getElementById("ddiv").style.display = "none";
+            document.getElementById("datadiv").style.display = "none";
+            document.getElementById("qrdiv").style.display = "block";
+            document.getElementById("pdiv").style.display = "block";
+        }).catch((error) => {
+            // An error happened.
+          });
+    });
+    
+    createPresId.addEventListener('click', (e) => {
+      let categoryId = document.getElementById('categoryId').value;
+      let diagnosisId = document.getElementById('diagnosisId').value;
+      let prescriptionId = document.getElementById('prescriptionId').value;
+      let spd = document.getElementById('spd').value;
+      let today = new Date().toLocaleDateString();
+      console.log(categoryId);
+      var timestamp = new Date().getTime();
+
+      set(ref(database, 'diagnoses/'+ timestamp), {
+        date: today,
+        category:categoryId,
+        Diagnosis: diagnosisId,
+        prescription: prescriptionId, 
+        spd: spd,
+        DoctorId: dId,
+        DoctorName: dName,
+        pName: province,
+        cName: city,
+        tel: phone,
+        user: x
+            
+      })
+      alert('ok');
+      DisplayValue();
+    });
+
+
+    function DisplayValue(){
+      const tasksRef = query(ref(database, "diagnoses"), orderByChild("user"), equalTo(x) );
+                
+                get(tasksRef)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                      console.log(st);
+                    AddAllItemsToTable(st);
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+    }
+
+    function DisplayUser(){
+      const tasksRef = query(ref(database, "users"), orderByChild("id"), equalTo(x) );
+                
+                get(tasksRef)
+                  .then((snapshot) => {
+                    var sti =[];
+                    snapshot.forEach(childSnapshot =>{
+                      sti.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                      console.log(sti);
+                    AddAllUser(sti);
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+
+    }
+  
+   function UserDetails(fName,lName,cName,pName,address,tel,dob,email,){
+     var nameId = document.getElementById("nameId");
+     var addressId = document.getElementById("addressId");
+     var dobId = document.getElementById("dobId");
+     var ageId = document.getElementById("ageId");
+     var telId = document.getElementById("telId");
+     
+      var birthdate = new Date(dob);
+      var cur = new Date();
+      var diff = cur-birthdate; 
+      var age = Math.floor(diff/31557600000);
+      console.log("adee",email);
+     
+      nameId.innerHTML = (fName+" "+lName);
+      addressId.innerHTML = address;
+      dobId.innerHTML = dob;
+      ageId.innerHTML = age;
+      telId.innerHTML = tel;
+      phone = tel;
+      province = pName;
+      city = cName;
+   }
+
+   function AddAllUser(sti){
+      
+      sti.forEach(element =>{
+      UserDetails(element.fName,element.lName,element.cName,element.pName,element.address,element.tel,element.dob,element.email)
+      });
+    }
+
+
+    function AddItemToTable(date,category,Diagnosis,prescription,spd,user,dId, dName){
+      
+      var tbody = document.getElementById("tbody");  
+      let trow = document.createElement("tr");
+       
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+        let td6 = document.createElement("td");
+        let spdsend=document.getElementById("para");
+    
+        td1.innerHTML = date;
+        td2.innerHTML = category;
+        td3.innerHTML = Diagnosis;
+        td4.innerHTML = prescription;
+        td5.innerHTML = dId;
+        td6.innerHTML = dName;
+        if(spd===undefined){
+          
+        }else{
+          spdsend.innerHTML += (spd+". ")
+        }
+
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+        trow.appendChild(td5);
+        trow.appendChild(td6);
+      
+
+        tbody.appendChild(trow);
+    }
+
+    function AddAllItemsToTable(TheStudent){
+      let spdsend=document.getElementById("para");
+      spdsend.innerHTML="";
+      tbody.innerHTML = "";
+     
+      TheStudent.forEach(element =>{
+      AddItemToTable(element.date, element.category, element.Diagnosis, 
+      element.prescription, element.spd, element.user, element.DoctorId, 
+      element.DoctorName)
+      });
+    }
+
+    $(document).ready(function() {
+                $("#search").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#tbody tr").filter(function() {
+                        $(this).toggle($(this).text()
+                        .toLowerCase().indexOf(value) > -1)
+                    });
+                });
+    });
+   
+     
+</script>
+
+
+
+
+

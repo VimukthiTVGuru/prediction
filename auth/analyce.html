@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(255, 225, 225);
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align:center; color: #818181;">Count of Registered Patients</h1>
+<div>
+    <div class="d-flex justify-content-center">
+         <div class="d-flex justify-content-start w-75">
+            <div style="margin-left: 100px; margin-top: 50px; margin-right: 10px; width: 75px;">
+                <dl>
+                    <dt id="all">All Island</dt>
+                    <dt id="p1" >Western</dt>        
+                            <dd id="c1">Colombo</dd>
+                            <dd id="c2">Gampaha</dd> 
+                            <dd id="c3">Kaluthara</dd> 
+                        <dt id="p2">Southern</dt>
+                            <dd id="c4">Galle</dd>
+                            <dd id="c5">Matara</dd>
+                            <dd id="c6">Hambantota</dd>  
+                        <dt id="p3">Central</dt>
+                            <dd id="c7">Kandy</dd>
+                            <dd id="c8">Matale</dd>
+                            <dd id="c9">Nuwara Eliya</dd>
+                        <dt id="p4">Northern</dt>
+                            <dd id="c10">Jaffna</dd>
+                            <dd id="c11">Kilinochchi</dd>
+                            <dd id="c12">Mannar</dd>
+                            <dd id="c13">Mullaitivu</dd>
+                            <dd id="c14">Vavuniya</dd>
+                </dl>
+            </div>
+            <div style="margin-left: 200px; margin-top: 87px; margin-right: 50px; width: 100px;">
+                    <dl>
+                            <dt id="p5">Uva</dt>
+                            <dd id="c15">Badulla</dd>
+                            <dd id="c16">Monaragala</dd>    
+                        <dt id="p6">North Western</dt>
+                            <dd id="c17">Kurunegala</dd>
+                            <dd id="c18">Puttalam</dd>
+                        <dt id="p7">North Central</dt>
+                            <dd id="c19">Anuradhapura</dd>
+                            <dd id="c20">Polonnaruwa</dd>
+                        <dt id="p8">Sabaragamuwa</dt>
+                            <dd id="c21">Kegalle</dd>
+                            <dd id="c22">Rathnapura</dd>  
+                        <dt id="p9">Eastern</dt>   
+                            <dd id="c23">Ampara</dd>
+                            <dd id="c24">Batticaloa</dd>
+                            <dd id="c25">Trincomalee</dd>
+                 </dl>
+            </div>    
+        </div>
+        <div id="myChart" style="width:100%; max-width:750px; height:750px; margin-top: 50px; margin-right: 50px;   background-color: rgb(255, 225, 225);"></div>  
+        </div>  
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart1" style="width:100%; max-width:300px; height:300px; "></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart2" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart3" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart4" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart5" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart6" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart7" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart8" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 300px; height: 300px; margin-top: 50px;">
+                    <div id="myChart9" style="width:100%; max-width:300px; height:300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+    import {getDatabase, set, ref, child, update, get,
+            query, orderByChild, equalTo} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+    
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        // Your configs
+        apiKey: "AIzaSyBzzFbIdtEvJbITERI0Z8z1fxVlGNxdDLs",
+  authDomain: "patientreg-990f5.firebaseapp.com",
+  projectId: "patientreg-990f5",
+  storageBucket: "patientreg-990f5.appspot.com",
+  messagingSenderId: "1010672762357",
+  appId: "1:1010672762357:web:20db3eac86471c37b574bc"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+    let p1=0,p2=0,p3=0,p4=0,p5=0,p6=0,p7=0,p8=0,p9=0;
+    let c1=0,c2=0,c3=0,c4=0,c5=0,c6=0,c7=0,c8=0,c9=0,c10=0,c11=0,c12=0,c13=0,c14=0,c15=0,c16=0,c17=0,c18=0,c19=0,c20=0,c21=0,c22=0,c23=0,c24=0,c25=0;
+    patientcount();
+    
+
+    //.............................................................
+
+
+    function chart(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Western',p1],
+            ['Southern',p3],
+            ['Central',p8],
+            ['Northern',p9],
+            ['Uva',p6],
+            ['North Western', p4],
+            ['North Central',p5],
+            ['Sabaragamuwa',p7],
+            ['Eastern',p2]
+            ]);
+            const options = {
+            title:'percentage of registered patients in provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart'));
+            chart.draw(data, options);
+            }
+    }
+    function chart1(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Colombo',c1],
+            ['Gampaha',c2],
+            ['Kaluthara',c3]
+            ]);
+            const options = {
+            title:'western province',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart1'));
+            chart.draw(data, options);
+            }
+    }
+    function chart2(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Galle',c4],
+            ['Matara',c5],
+            ['Hambantota',c6]
+            ]);
+            const options = {
+            title:'southern provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart2'));
+            chart.draw(data, options);
+            }
+    }
+    function chart3(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Kandy',c7],
+            ['Matale',c8],
+            ['Nuwara Eliya',c9]
+            ]);
+            const options = {
+            title:'central provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart3'));
+            chart.draw(data, options);
+            }
+    }
+    function chart4(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Jaffna',c10],
+            ['Kilinochchi',c11],
+            ['Mannar',c12],
+            ['Mullaitivu',c13],
+            ['Vavuniya',c14]
+            ]);
+            const options = {
+            title:'northern provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart4'));
+            chart.draw(data, options);
+            }
+    }
+    function chart5(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Badulla',c15],
+            ['Monaragala',c16]
+            ]);
+            const options = {
+            title:'uva provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart5'));
+            chart.draw(data, options);
+            }
+    }
+    function chart6(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Kurunegala',c17],
+            ['Puttalam',c18]
+            ]);
+            const options = {
+            title:'north western provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart6'));
+            chart.draw(data, options);
+            }
+    }
+    function chart7(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Anuradhapura',c19],
+            ['Polonnaruwa',c20]
+            ]);
+            const options = {
+            title:'north central provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart7'));
+            chart.draw(data, options);
+            }
+    }
+    function chart8(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Kegalle',c21],
+            ['Rathnapura',c22],
+
+            ]);
+            const options = {
+            title:'sabaragamuwa provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart8'));
+            chart.draw(data, options);
+        }
+    }
+    function chart9(){
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                console.log(p1);
+            const data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Ampara',c23],
+            ['Batticaloa',c24],
+            ['Trincomalee',c25]
+            ]);
+            const options = {
+            title:'eastern provinces',
+            is3D:true
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('myChart9'));
+            chart.draw(data, options);
+            }
+    }
+
+
+
+    //.............................................................
+    function patientcount(){
+        const all = ref(database, "users");
+        const west = query(ref(database, "users"), orderByChild("pName"), equalTo("Western") );
+        const east = query(ref(database, "users"), orderByChild("pName"), equalTo("Eastern") );
+        const south = query(ref(database, "users"), orderByChild("pName"), equalTo("Southern") );
+        const nWest = query(ref(database, "users"), orderByChild("pName"), equalTo("North Western") );
+        const nCentral = query(ref(database, "users"), orderByChild("pName"), equalTo("North Central") );
+        const uva = query(ref(database, "users"), orderByChild("pName"), equalTo("Uva") );
+        const sabara = query(ref(database, "users"), orderByChild("pName"), equalTo("Sabaragamuwa") );
+        const central = query(ref(database, "users"), orderByChild("pName"), equalTo("Central") );
+        const north = query(ref(database, "users"), orderByChild("pName"), equalTo("Northern") );
+
+
+        const Colombo = query(ref(database, "users"), orderByChild("cName"), equalTo("Colombo") );
+        const Gampaha = query(ref(database, "users"), orderByChild("cName"), equalTo("Gampaha") );
+        const Kaluthara = query(ref(database, "users"), orderByChild("cName"), equalTo("Kaluthara") );
+        const Galle = query(ref(database, "users"), orderByChild("cName"), equalTo("Galle") );
+        const Matara = query(ref(database, "users"), orderByChild("cName"), equalTo("Matara") );
+        const Hambantota = query(ref(database, "users"), orderByChild("cName"), equalTo("Hambantota") );
+        const Kandy = query(ref(database, "users"), orderByChild("cName"), equalTo("Kandy") );
+        const Matale = query(ref(database, "users"), orderByChild("cName"), equalTo("Matale") );
+        const Nuwara = query(ref(database, "users"), orderByChild("cName"), equalTo("Nuwara Eliya") );
+        const Jaffna = query(ref(database, "users"), orderByChild("cName"), equalTo("Jaffna") );
+        const Kilinochchi = query(ref(database, "users"), orderByChild("cName"), equalTo("Kilinochchi") );
+        const Mannar = query(ref(database, "users"), orderByChild("cName"), equalTo("Mannar") );
+        const Mullaitivu = query(ref(database, "users"), orderByChild("cName"), equalTo("Mullaitivu") );
+        const Vavuniya = query(ref(database, "users"), orderByChild("cName"), equalTo("Vavuniya") );
+        const Badulla = query(ref(database, "users"), orderByChild("cName"), equalTo("Badulla") );
+        const Monaragala = query(ref(database, "users"), orderByChild("cName"), equalTo("Monaragala") );
+        const Kurunegala = query(ref(database, "users"), orderByChild("cName"), equalTo("Kurunegala") );
+        const Puttalam = query(ref(database, "users"), orderByChild("cName"), equalTo("Puttalam") );
+        const Anuradhapura = query(ref(database, "users"), orderByChild("cName"), equalTo("Anuradhapura") );
+        const Polonnaruwa = query(ref(database, "users"), orderByChild("cName"), equalTo("Polonnaruwa") );
+        const Kegalle = query(ref(database, "users"), orderByChild("cName"), equalTo("Kegalle") );
+        const Rathnapura = query(ref(database, "users"), orderByChild("cName"), equalTo("Rathnapura") );
+        const Ampara = query(ref(database, "users"), orderByChild("cName"), equalTo("Ampara") );
+        const Trincomalee = query(ref(database, "users"), orderByChild("cName"), equalTo("Trincomalee") );
+        const Batticaloa = query(ref(database, "users"), orderByChild("cName"), equalTo("Batticaloa") );
+             
+        //---------------------------privince---------------------------------------
+                get(all)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      document.getElementById("all").innerHTML=("All Island: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(west)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p1=a;
+                      console.log("aaaaaaaaaaaaa",p1);
+                      chart(); 
+                      document.getElementById("p1").innerHTML=("Western: "+ a);
+                    }); 
+                     
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(east)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p2 =a;
+                      document.getElementById("p9").innerHTML=("Eastern: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(south)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p3 =a;
+                      document.getElementById("p2").innerHTML=("Southern: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(nWest)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p4 =a;
+                      document.getElementById("p6").innerHTML=("North West: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(nCentral)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p5 =a;
+                      document.getElementById("p7").innerHTML=("North Central: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(uva)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p6 =a;
+                      document.getElementById("p5").innerHTML=("Uva: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(sabara)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p7 =a;
+                      console.log("ade",p7);
+                      chart();
+                      console.log("adeeeeeeee");
+                      document.getElementById("p8").innerHTML=("Sabaragamuwa: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(central)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p8 =a;
+                      document.getElementById("p3").innerHTML=("Central: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(north)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      p9 =a;
+                      document.getElementById("p4").innerHTML=("Northern "+ a);
+                    });   
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+    //--------------------------city-----------------------------
+                get(Colombo)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c1 = a;
+                      chart1();
+                      document.getElementById("c1").innerHTML=("Colombo: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(Gampaha)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c2 = a;
+                      chart1();
+                      document.getElementById("c2").innerHTML=("Gampaha: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Kaluthara)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c3 = a;
+                      chart1();
+                      document.getElementById("c3").innerHTML=("Kaluthara: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Galle)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c4 = a;
+                      chart2();
+                      document.getElementById("c4").innerHTML=("Galle: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Matara)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c5 = a;
+                      chart2();
+                      document.getElementById("c5").innerHTML=("Matara: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Hambantota)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c6 = a;
+                      chart2();
+                      document.getElementById("c6").innerHTML=("Hambantota: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Kandy)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c7 = a;
+                      chart3();
+                      document.getElementById("c7").innerHTML=("Kandy: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Matale)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c8 = a;
+                      chart3();
+                      document.getElementById("c8").innerHTML=("Matale: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Nuwara)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c9 = a;
+                      chart3();
+                      document.getElementById("c9").innerHTML=("Nuwar Eliya: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Jaffna)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c10 = a;
+                      chart4();
+                      document.getElementById("c10").innerHTML=("Jaffna "+ a);
+                    });   
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(Kilinochchi)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c11 = a;
+                      chart4();
+                      document.getElementById("c11").innerHTML=("Kilinochchi: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(Mannar)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c12 = a;
+                      chart4();
+                      document.getElementById("c12").innerHTML=("Mannar: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Mullaitivu)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c13 = a;
+                      chart4();
+                      console.log("tttttttttttttttttt",c13)
+                      document.getElementById("c13").innerHTML=("Mullaitive: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Vavuniya)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c14 = a;
+                      chart4();
+                      document.getElementById("c14").innerHTML=("Vavuniya: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Badulla)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c15 = a;
+                      chart5();
+                      document.getElementById("c15").innerHTML=("Badulla: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Monaragala)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c16 = a;
+                      chart5();
+                      document.getElementById("c16").innerHTML=("Monaragala: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Kurunegala)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c17 = a;
+                      chart6();
+                      document.getElementById("c17").innerHTML=("Kurunegala: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Puttalam)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c18 = a;
+                      chart6();
+                      document.getElementById("c18").innerHTML=("Puttalam: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Anuradhapura)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c19 = a;
+                      chart7();
+                      document.getElementById("c19").innerHTML=("Anuradhapura: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Polonnaruwa)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c20 = a;
+                      chart7();
+                      document.getElementById("c20").innerHTML=("Polonnaruwa "+ a);
+                    });   
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(Kegalle)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c21 = a;
+                      chart8();
+                      document.getElementById("c21").innerHTML=("Kegalle: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                get(Rathnapura)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c22 = a;
+                      chart8();
+                      document.getElementById("c22").innerHTML=("Rathnapura: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Ampara)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c23 = a;
+                      chart9();
+                      document.getElementById("c23").innerHTML=("Ampara: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Batticaloa)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c24 = a;
+                      chart9();
+                      document.getElementById("c24").innerHTML=("Batticaloa: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+                  get(Trincomalee)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                      let a = st.length;
+                      c25 = a;
+                      chart9();
+                      document.getElementById("c25").innerHTML=("Trincomalee: "+ a);
+                    });    
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+ 
+    }
+
+
+</script>

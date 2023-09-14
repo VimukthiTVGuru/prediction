@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(255, 225, 225);
+        }
+    </style>
+  </head>
+<body>
+<div class="position-absolute top-0 start-50 w-100 translate-middle-x mt-5">
+
+<h2 class="fw-semibold " style="text-align: center; color: #818181;">Report Genarate and SMS Spread</h2>
+<br>
+<form style="margin-left: 3%;">
+<input type="text" id="startDateInput" onkeyup="searchTable()" placeholder="Start date...">
+<input type="text" id="endDateInput" onkeyup="searchTable()" placeholder="End date...">
+<input type="text" id="minAgeInput" onkeyup="searchTable()" placeholder="Min age...">
+<input type="text" id="maxAgeInput" onkeyup="searchTable()" placeholder="Max age...">
+<input type="text" id="diagnosisInput" onkeyup="searchTable()" placeholder="Search by diagnosis...">
+<input type="text" id="provinceInput" onkeyup="searchTable()" placeholder="Search by province...">
+<input type="text" id="cityInput" onkeyup="searchTable()" placeholder="Search by city...">
+<button onclick="clearFields()" class="btn btn-light" style=" background-color: rgb(37, 47, 53);color: white;">Clear Fields</button>
+</form> 
+<p id="countDisplay" class="fw-semibold " style="color: #9d3700; text-align: center;"></p>
+</div>
+<br><br>
+<div class=" w-25 h-50 p-3 border border-primary mr-5  position-absolute top-50 end-0 translate-middle-y">
+    <h5 style="text-align:center">Message Spread Section<section></section></h5>
+    <label><b>Select the City</b></label>
+    <select name="ccity" id="ccity"  class="form-select">
+        <option value="Colombo">Colombo</option>
+        <option value="Gampaha">Gampaha</option>
+        <option value="Kaluthara">Kaluthara</option>
+        <option value="Galle">Galle</option>
+        <option value="Matara">Matara</option>
+        <option value="Hambantota">Hambantota</option>
+        <option value="Kandy">Kandy</option>
+        <option value="Matale">Matale</option>
+        <option value="Nuwara Eliya">Nuwara Eliya</option>
+        <option value="Jaffna">Jaffna</option>
+        <option value="Kilinochchi">Kilinochchi</option>
+        <option value="Mannar">Mannar</option>
+        <option value="Mullaitivu">Mullaitivu</option>
+        <option value="Vavuniya">Vavuniya</option>
+        <option value="Badulla">Badulla</option>
+        <option value="Monaragala">Monaragala</option>
+        <option value="Kurunegala">Kurunegala</option>
+        <option value="Puttalam">Puttalam</option>
+        <option value="Anuradhapura">Anuradhapura</option>
+        <option value="Polonnaruwa">Polonnaruwa</option>
+        <option value="Kegalle">Kegalle</option>
+        <option value="Rathnapura">Rathnapura</option>
+        <option value="Ampara">Ampara</option>
+        <option value="Batticaloa">Batticaloa</option>
+        <option value="Trincomalee">Trincomalee</option>
+    </select>
+    <button id="select" class="btn btn-success" style=" background-color: rgb(37, 47, 53);color: white;">select area</button>
+    <p id="selectcity"></p>
+    <label><b>Text the SMS</b></label>
+    <textarea type="text" id="message" style="height:25%; width:100%;"> </textarea>
+    <button id="send" class="btn btn-success"style=" background-color: rgb(37, 47, 53);color: white;">Send SMS</button>
+</div>
+<div class="position-absolute top-50 start-0 translate-middle-y w-75 h-50 p-3"><br><br><br><br>
+<table class="table" style="overflow-y: scroll;">
+    <thead>
+    <tr>
+        <th scope="col">Patient ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Age</th>
+        <th scope="col">Category</th>
+        <th scope="col">Diagnosis</th>
+        <th scope="col">Province</th>
+        <th scope="col">City</th>
+        <th scope="col">Tel No</th>
+    </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>
+
+</div>
+
+</body>
+</html>
+<script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+    import {getDatabase, set, ref, child, update, get,
+            query, orderByChild, equalTo} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+    
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        // Your configs
+        apiKey: "AIzaSyBzzFbIdtEvJbITERI0Z8z1fxVlGNxdDLs",
+  authDomain: "patientreg-990f5.firebaseapp.com",
+  projectId: "patientreg-990f5",
+  storageBucket: "patientreg-990f5.appspot.com",
+  messagingSenderId: "1010672762357",
+  appId: "1:1010672762357:web:20db3eac86471c37b574bc"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+    var tala =[];
+    DisplayValue();
+    function DisplayValue(){
+      const tasksRef = query(ref(database, "diagnoses"), orderByChild("user") );
+                
+                get(tasksRef)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                      console.log(st);
+                    AddAllItemsToTable(st);
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+    }
+    
+    function AddItemToTable(date,category,Diagnosis,spd,user,dId,dName,cName,pName,tel){
+      
+      var tbody = document.getElementById("tbody");  
+      let trow = document.createElement("tr");
+       
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+    
+        let td7 = document.createElement("td");
+        let td8 = document.createElement("td");
+        let td9 = document.createElement("td");
+    
+
+       
+        td1.innerHTML = user;
+        td2.innerHTML = date;
+        td3.innerHTML = "25";
+        td4.innerHTML = category;
+        td5.innerHTML = Diagnosis;
+ 
+        td7.innerHTML = pName;
+        td8.innerHTML = cName;
+        td9.innerHTML = tel;
+        console.log(user);
+
+
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+        trow.appendChild(td5);
+
+        trow.appendChild(td7);
+        trow.appendChild(td8);
+        trow.appendChild(td9);
+
+      
+
+        tbody.appendChild(trow);
+        searchTable();
+    }
+
+    function AddAllItemsToTable(TheStudent){
+      tbody.innerHTML = "";
+      TheStudent.forEach(element =>{
+      AddItemToTable(element.date, element.category, element.Diagnosis, element.spd, element.user, element.DoctorId, element.DoctorName, element.cName, element.pName,element.tel)
+      });
+    }
+//...............search for msg.................................................
+
+select.addEventListener('click', (e) => {
+    
+DisplayValue1();
+    function DisplayValue1(){
+        tala = [];
+        let ccity = document.getElementById("ccity").value;
+        document.getElementById("selectcity").innerHTML=(ccity+" area selected for spread the SMS.");
+      const tasksRef = query(ref(database, "diagnoses"), orderByChild("cName"),equalTo(ccity));
+                
+                get(tasksRef)
+                  .then((snapshot) => {
+                    var st =[];
+                    snapshot.forEach(childSnapshot =>{
+                      st.push(childSnapshot.val());
+                    });    
+                      //const data = snapshot.val();
+                    AddAllItemsToTable1(st);
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                });
+    }
+    
+    function AddItemToTable1(tel){
+      
+        tala.push(tel);
+        console.log(tala);
+     
+    }
+
+    function AddAllItemsToTable1(TheStudent){
+     
+      TheStudent.forEach(element =>{
+      AddItemToTable1(element.tel)
+      });
+    }
+});
+
+//..............................send sms............................................
+
+send.addEventListener('click', (e) => {
+        event.preventDefault(); // prevent the form from submitting normally
+
+        const user_id = '24924';
+        const api_key = 'Q2sXpUlqznoXlE3QfSas';
+        const sender_id = 'NotifyDEMO';
+        const message = document.getElementById('message').value;
+        tala.forEach(function(contact) {
+          const phone = 94702245353;
+
+          fetch(`https://app.notify.lk/api/v1/send?user_id=${user_id}&api_key=${api_key}&sender_id=${sender_id}&to=${phone}&message=${message}`, {
+            method: 'POST'
+          })
+          .then(response => {
+            console.log(`SMS sent to ${phone} successfully.`);
+            alert("SMS Spread Successfully");
+          })
+          .catch(error => {
+            console.error(`Error sending SMS to ${phone}:`, error);
+            alert(error);
+          });
+        }); 
+    });
+
+</script>
+
+<script type="text/javascript">
+	
+    
+  
+    function searchTable() {
+      const startDateInput = document.getElementById('startDateInput').value.toUpperCase();
+      const endDateInput = document.getElementById('endDateInput').value.toUpperCase();
+      const minAgeInput = document.getElementById('minAgeInput').value.toUpperCase();
+      const maxAgeInput = document.getElementById('maxAgeInput').value.toUpperCase();
+      const diagnosisInput = document.getElementById('diagnosisInput').value.toUpperCase();
+      const provinceInput = document.getElementById('provinceInput').value.toUpperCase();
+      const cityInput = document.getElementById('cityInput').value.toUpperCase();
+      const tbody = document.getElementById('tbody');
+      const tr = tbody.getElementsByTagName('tr');
+      let count = 0;
+    
+      for (let i = 0; i < tr.length; i++) {
+        const tdDate = tr[i].getElementsByTagName('td')[1];
+        const tdAge = tr[i].getElementsByTagName('td')[2];
+        const tdDiagnosis = tr[i].getElementsByTagName('td')[4];
+        const tdProvince = tr[i].getElementsByTagName('td')[5];
+        const tdCity = tr[i].getElementsByTagName('td')[6];
+    
+        const txtValueDate = tdDate.textContent || tdDate.innerText;
+        const txtValueAge = tdAge.textContent || tdAge.innerText;
+        const txtValueDiagnosis = tdDiagnosis.textContent || tdDiagnosis.innerText;
+        const txtValueProvince = tdProvince.textContent || tdProvince.innerText;
+        const txtValueCity = tdCity.textContent || tdCity.innerText;
+    
+        if ((txtValueDate >= startDateInput || startDateInput === "") &&
+            (txtValueDate <= endDateInput || endDateInput === "") &&
+            (parseInt(txtValueAge) >= parseInt(minAgeInput) || minAgeInput === "") &&
+            (parseInt(txtValueAge) <= parseInt(maxAgeInput) || maxAgeInput === "") &&
+            (txtValueDiagnosis.toUpperCase().indexOf(diagnosisInput) > -1 || 
+            diagnosisInput === "") &&
+            (txtValueProvince.toUpperCase().indexOf(provinceInput) > -1 || 
+            provinceInput === "") &&
+            (txtValueCity.toUpperCase().indexOf(cityInput) > -1 || cityInput === "")) {
+          tr[i].style.display = "";
+          count++;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+      const countDisplay = document.getElementById('countDisplay');
+      countDisplay.innerHTML = `Patient Count: ${count}`;
+    }
+    
+    function clearFields() {
+      document.getElementById('startDateInput').value = "";
+      document.getElementById('endDateInput').value = "";
+      document.getElementById('minAgeInput').value = "";
+      document.getElementById('maxAgeInput').value = "";
+      document.getElementById('diagnosisInput').value = "";
+      document.getElementById('provinceInput').value = "";
+      document.getElementById('cityInput').value = "";
+      searchTable(); 
+    }
+    
+
+
+    </script>
